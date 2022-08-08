@@ -1,0 +1,15 @@
+GET
+http://localhost:8092/ministerio/listar
+
+
+
+POST
+http://localhost:8092/ministerio/incluir
+
+  {
+    "id": 9,
+    "nome": "teste",
+    "totalCargosConfianca": 4444,
+    "totalFuncionarios": 5555,
+    "orcamento": 355500.0
+  }

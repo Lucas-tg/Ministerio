@@ -1,5 +1,18 @@
 package br.edu.unifaj.poo.ministerio.Ministerio.Entity;
+
+import lombok.*;
+
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@EqualsAndHashCode
+@Data
 public class Ministerio {
+
+
+	private Long id;
 
 	private String nome;
 
@@ -9,6 +22,5 @@ public class Ministerio {
 
 	private Double orcamento;
 
-	private Secretaria[] secretaria;
-
+//	private Secretaria[] secretaria;
 }
