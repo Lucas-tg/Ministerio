@@ -31,8 +31,9 @@ public class MinisterioController {
 		return null;
 	}
 
-	public Ministerio excluir(Ministerio m) {
-		return null;
+	@DeleteMapping("/deletar/{id}")
+	public void excluir(@PathVariable("id") Long id) throws Exception {
+		ministerioService.excluir(id);
 	}
 
 	@GetMapping("/listar")

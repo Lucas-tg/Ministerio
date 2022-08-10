@@ -21,8 +21,8 @@ public class MinisterioService {
 		return null;
 	}
 
-	public Ministerio excluir(Ministerio m) {
-		return null;
+	public void excluir(Long id) throws Exception {
+		ministerioDAO.excluir(id);
 	}
 
 	public List<Ministerio> listar() throws Exception {

@@ -14,6 +14,7 @@ import java.util.List;
 
 @Repository
 public class MinisterioDAO {
+	private JdbcTemplate jdbcTemplateObject;
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
@@ -70,8 +71,21 @@ public class MinisterioDAO {
 		return null;
 	}
 
-	public Ministerio excluir(Ministerio m) {
-		return null;
+	public void excluir(Long id) throws Exception{
+
+		String deleteQuery  = "DELETE FROM ministerio where id_ministerio = ?";
+		try(Connection con = jdbcTemplate.getDataSource().getConnection();
+			PreparedStatement  pstmt = con.prepareStatement(deleteQuery);
+		)
+		{
+
+			pstmt.setLong(1, id);
+			pstmt.execute();
+
+		}catch (Exception e) {
+			System.err.println("Erro ao deletar os dados:" + e);
+			throw e;
+		}
 	}
 
 
