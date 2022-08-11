@@ -17,8 +17,8 @@ public class MinisterioService {
 		return ministerioDAO.incluir(m);
 	}
 
-	public Ministerio alterar(Ministerio m) {
-		return null;
+	public Ministerio alterar(Ministerio m) throws Exception {
+		return ministerioDAO.alterar(m);
 	}
 
 	public void excluir(Long id) throws Exception {

@@ -67,8 +67,28 @@ public class MinisterioDAO {
 		}
 	}
 
-	public Ministerio alterar(Ministerio m) {
-		return null;
+	public Ministerio alterar(Ministerio m)  throws Exception{
+		String sqlAlterar = "UPDATE ministerio SET nome_ministerio = ?, totalCargosConfianca_ministerio =? , " +
+				"totalFuncionarios_ministerio = ?, orcamento_ministerio = ? WHERE id_ministerio = ?";
+		try (Connection con = jdbcTemplate.getDataSource().getConnection();
+			 PreparedStatement ps = con.prepareStatement(
+					 sqlAlterar, Statement.RETURN_GENERATED_KEYS);) {
+
+			ps.setString(1, m.getNome());
+			ps.setInt(2, m.getTotalCargosConfianca());
+			ps.setInt(3, m.getTotalFuncionarios());
+			ps.setDouble(4, m.getOrcamento());
+			ps.setLong(5, m.getId());
+			int result = ps.executeUpdate();
+
+			if(result == 1){
+				ResultSet tableKeys = ps.getGeneratedKeys(); //ID Gerado.
+				tableKeys.next();
+				System.out.println("Ministerio alterado com sucesso:" + m.getNome());
+				return m;
+			}
+			throw new Exception("Erro ao inserir no banco.");
+		}
 	}
 
 	public void excluir(Long id) throws Exception{
@@ -78,7 +98,6 @@ public class MinisterioDAO {
 			PreparedStatement  pstmt = con.prepareStatement(deleteQuery);
 		)
 		{
-
 			pstmt.setLong(1, id);
 			pstmt.execute();
 
@@ -88,32 +107,6 @@ public class MinisterioDAO {
 		}
 	}
 
-
-//	public List<Ministerio> listar(Ministerio ministerio) throws Exception {
-//		try {
-//			List<Ministerio> ministerios = new ArrayList<>();
-//			Connection con = jdbcTemplate.getDataSource().getConnection();
-//			String query = "SELECT id_ministerio, nome_ministerio, totalCargosConfianca_ministerio, totalFuncionarios_ministerio, orcamento_ministerio, nota FROM ministerio WHERE id_ministerio=?";
-//			PreparedStatement statement = con.prepareStatement(query);
-//			statement.setLong(1, ministerio.getId()); // int ou long?
-//			ResultSet result = statement.executeQuery();
-//			while (result.next()) {
-//				Long id_ministerio = result.getLong("id_ministerio");
-//				String nome_ministerio = result.getString("nome_ministerio");
-//				int totalCargosConfianca_ministerio = result.getInt("totalCargosConfianca_ministerio");
-//				int totalFuncionarios_ministerio = result.getInt("totalFuncionarios_ministerio");
-//				Double orcamento_ministerio = result.getDouble("orcamento_ministerio");
-//				ministerios.add(new Ministerio(id_ministerio, nome_ministerio, totalCargosConfianca_ministerio, totalFuncionarios_ministerio, orcamento_ministerio));
-//
-//			}
-//			con.close();
-//			statement.close();
-//			return ministerios;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			throw new Exception("Falha ao recuperar avaliacoes da receita: " + ministerio.getNome());
-//		}
-//	}
 
 	public List<Ministerio> listar() throws Exception {
 		List<Ministerio> ministerios = new ArrayList<>();

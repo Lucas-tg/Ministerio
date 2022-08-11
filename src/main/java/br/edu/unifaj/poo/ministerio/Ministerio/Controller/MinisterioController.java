@@ -27,8 +27,13 @@ public class MinisterioController {
 		}
 	}
 
-	public Ministerio alterar(Ministerio m) {
-		return null;
+	@PutMapping("/alterar")
+	public Retorno alterar(@RequestBody Ministerio m) {
+		try {
+			return new Retorno(ministerioService.alterar(m));
+		} catch (Exception ex) {
+			return new Retorno(ex.getMessage());
+		}
 	}
 
 	@DeleteMapping("/deletar/{id}")
