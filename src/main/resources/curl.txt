@@ -1,15 +1,28 @@
 GET
-http://localhost:8092/ministerio/listar
-
+curl --location --request GET 'http://localhost:8092/ministerio/listar'
 
 
 POST
-http://localhost:8092/ministerio/incluir
-
-  {
+curl --location --request POST 'http://localhost:8092/ministerio/incluir' \
+--header 'Content-Type: application/json' \
+--data-raw '  {
     "id": 9,
     "nome": "teste",
     "totalCargosConfianca": 4444,
     "totalFuncionarios": 5555,
     "orcamento": 355500.0
-  }
+  }'
+
+PUT
+curl --location --request PUT 'http://localhost:8092/ministerio/alterar' \
+--header 'Content-Type: application/json' \
+--data-raw '  {
+    "id": 1,
+    "nome": "testee",
+    "totalCargosConfianca": 4444,
+    "totalFuncionarios": 5555,
+    "orcamento": 355500.0
+  }'
+
+DELETE
+curl --location --request DELETE 'http://localhost:8092/ministerio/deletar/9'

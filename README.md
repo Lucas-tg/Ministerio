@@ -7,3 +7,14 @@ seu ministro, cargos de confiança, um total de número de funcionários e seu o
 - Criar banco de dados para classes do modelo;
 - Gerar interface REST para os dados
 - Apresentar os dados em Interface WEB.
+
+# UML (astah)
+![image info](src/main/resources/astah/Presidente.png)
+
+
+# Banco de Dados (H2)
+Abrir Arquivo:  [Banco de Dados](src/main/resources/CreateDatabase.sql)
+
+
+# CURL
+Abrir Arquivo: [curl.txt](src/main/resources/curl.txt) 
